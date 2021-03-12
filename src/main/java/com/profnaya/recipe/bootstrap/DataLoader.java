@@ -52,11 +52,10 @@ public class DataLoader implements CommandLineRunner {
 
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("Be careful handling chiles if using. Wash your hands thoroughly after handling and do not touch your eyes or the area near your eyes with your hands for several hours.");
-        guacNotes.setRecipe(guacRecipe);
         guacRecipe.setNotes(guacNotes);
 
-        guacRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(0.25), teaSpoon, guacRecipe));
-        guacRecipe.getIngredients().add(new Ingredient("lemon juice", new BigDecimal(1), tableSpoon, guacRecipe));
+        guacRecipe.addIngredient(new Ingredient("salt", new BigDecimal(0.25), teaSpoon));
+        guacRecipe.addIngredient(new Ingredient("lemon juice", new BigDecimal(1), tableSpoon));
 
         guacRecipe.getCategories().add(mexicanCategory);
 
@@ -73,11 +72,10 @@ public class DataLoader implements CommandLineRunner {
 
         Notes tacosNotes = new Notes();
         tacosNotes.setRecipeNotes("Look for ancho chile powder with the Mexican ingredients at your grocery store, on buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
-        tacosNotes.setRecipe(tacosRecipe);
         tacosRecipe.setNotes(tacosNotes);
 
-        tacosRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(0.5), teaSpoon, tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("orange zest", new BigDecimal(1), tableSpoon, tacosRecipe));
+        tacosRecipe.addIngredient(new Ingredient("salt", new BigDecimal(0.5), teaSpoon));
+        tacosRecipe.addIngredient(new Ingredient("orange zest", new BigDecimal(1), tableSpoon));
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
