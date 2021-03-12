@@ -1,0 +1,89 @@
+package com.profnaya.recipe.bootstrap;
+
+import com.profnaya.recipe.domain.*;
+import com.profnaya.recipe.repository.CategoryRepository;
+import com.profnaya.recipe.repository.RecipeRepository;
+import com.profnaya.recipe.repository.UnitOfMeasureRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class DataLoader implements CommandLineRunner {
+    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final CategoryRepository categoryRepository;
+    private final RecipeRepository recipeRepository;
+
+    public DataLoader(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository, RecipeRepository recipeRepository) {
+        this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.categoryRepository = categoryRepository;
+        this.recipeRepository = recipeRepository;
+    }
+
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        loadData();
+    }
+
+    private void loadData() {
+        List<Recipe> recipes = new ArrayList<>();
+        UnitOfMeasure teaSpoon = unitOfMeasureRepository.findByDescription("Teaspoon").get();
+        UnitOfMeasure tableSpoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
+
+        Category mexicanCategory = categoryRepository.findByDescription("Mexican").get();
+        Category italianCategory = categoryRepository.findByDescription("Italian").get();
+        Category americanCategory = categoryRepository.findByDescription("American").get();
+        Category mongolianCategory = categoryRepository.findByDescription("Mongolian").get();
+
+
+        Recipe guacRecipe = new Recipe();
+        guacRecipe.setDescription("Perfect Guacamole");
+        guacRecipe.setPrepTime(10);
+        guacRecipe.setCookTime(0);
+        guacRecipe.setServings(4);
+        guacRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacRecipe.setDirections("Cut the avocado, remove flesh: Mash with a fork: Add salt, lime juice, and the rest: Serve:");
+        guacRecipe.setDifficulty(Difficulty.EASY);
+
+        Notes guacNotes = new Notes();
+        guacNotes.setRecipeNotes("Be careful handling chiles if using. Wash your hands thoroughly after handling and do not touch your eyes or the area near your eyes with your hands for several hours.");
+        guacNotes.setRecipe(guacRecipe);
+        guacRecipe.setNotes(guacNotes);
+
+        guacRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(0.25), teaSpoon, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("lemon juice", new BigDecimal(1), tableSpoon, guacRecipe));
+
+        guacRecipe.getCategories().add(mexicanCategory);
+
+        recipes.add(guacRecipe);
+
+        Recipe tacosRecipe = new Recipe();
+        tacosRecipe.setDescription("Spicy Grilled Chicken Tacos");
+        tacosRecipe.setPrepTime(20);
+        tacosRecipe.setCookTime(15);
+        tacosRecipe.setServings(6);
+        tacosRecipe.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+        tacosRecipe.setDirections("Prepare a gas or charcoal grill for medium-high, direct heat: Make the marinade and coat the chicken: Grill the chicken: Warm the tortillas: Assemble the tacos:");
+        tacosRecipe.setDifficulty(Difficulty.MODERATE);
+
+        Notes tacosNotes = new Notes();
+        tacosNotes.setRecipeNotes("Look for ancho chile powder with the Mexican ingredients at your grocery store, on buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
+        tacosNotes.setRecipe(tacosRecipe);
+        tacosRecipe.setNotes(tacosNotes);
+
+        tacosRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(0.5), teaSpoon, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredient("orange zest", new BigDecimal(1), tableSpoon, tacosRecipe));
+
+        tacosRecipe.getCategories().add(americanCategory);
+        tacosRecipe.getCategories().add(mexicanCategory);
+
+        recipes.add(tacosRecipe);
+
+        recipeRepository.saveAll(recipes);
+    }
+}
