@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -19,9 +18,6 @@ public class RecipeControllerTest {
 
     @Mock
     RecipeService recipeService;
-
-    @Mock
-    Model model;
 
     RecipeController controller;
 
