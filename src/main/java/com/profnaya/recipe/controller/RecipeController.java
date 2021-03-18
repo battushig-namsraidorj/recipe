@@ -1,11 +1,13 @@
 package com.profnaya.recipe.controller;
 
 import com.profnaya.recipe.service.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -18,6 +20,7 @@ public class RecipeController {
 
     @RequestMapping("/recipe/show/{id}")
     public String showRecipeById(@PathVariable String id, Model model) {
+        log.debug("I'm in recipe controller");
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
     }
