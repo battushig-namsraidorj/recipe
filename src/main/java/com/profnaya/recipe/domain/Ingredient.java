@@ -72,4 +72,9 @@ public class Ingredient {
     public void setUom(UnitOfMeasure uom) {
         this.uom = uom;
     }
+
+    @Override
+    public String toString() {
+        return amount + " " + uom + " " + description;
+    }
 }
