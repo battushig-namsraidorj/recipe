@@ -1,5 +1,7 @@
 package com.profnaya.recipe.service;
 
+import com.profnaya.recipe.converter.RecipeCommandToRecipe;
+import com.profnaya.recipe.converter.RecipeToRecipeCommand;
 import com.profnaya.recipe.domain.Recipe;
 import com.profnaya.recipe.repository.RecipeRepository;
 import org.junit.Before;
@@ -22,10 +24,16 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test

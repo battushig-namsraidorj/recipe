@@ -1,6 +1,5 @@
 package com.profnaya.recipe.converter;
 
-import com.profnaya.recipe.command.NotesCommand;
 import com.profnaya.recipe.domain.Notes;
 import com.sun.istack.Nullable;
 import lombok.Synchronized;
@@ -8,12 +7,12 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
+public class NotesCommandToNotes implements Converter<com.profnaya.recipe.command.NotesCommand, Notes> {
 
     @Synchronized
     @Nullable
     @Override
-    public Notes convert(NotesCommand source) {
+    public Notes convert(com.profnaya.recipe.command.NotesCommand source) {
         if (source == null) {
             return null;
         }
