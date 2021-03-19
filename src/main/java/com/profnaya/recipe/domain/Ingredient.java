@@ -40,4 +40,8 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
+    @Override
+    public String toString() {
+        return amount + " " + uom + " " + description;
+    }
 }
