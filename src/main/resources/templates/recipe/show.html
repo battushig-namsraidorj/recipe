@@ -130,7 +130,9 @@
                             <ul th:each="ingredient : ${recipe.ingredients}">
                                 <li th:remove="all">1 Cup of milk</li>
                                 <li th:remove="all">1 Teaspoon of chocolate</li>
-                                <li th:text="${ingredient}">1 Teaspoon of salt</li>
+                                <li th:text="${(ingredient.getAmount() +
+                                        ' ' + ingredient.uom.getDescription() +
+                                        ' - ' + ingredient.getDescription())}">1 Teaspoon of salt</li>
                             </ul>
                         </div>
                     </div>
