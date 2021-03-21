@@ -1,5 +1,6 @@
 package com.profnaya.recipe.controller;
 
+import com.profnaya.recipe.service.IngredientService;
 import com.profnaya.recipe.service.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IngredientController {
 
     private final RecipeService recipeService;
+    private final IngredientService ingredientService;
 
-    public IngredientController(RecipeService recipeService) {
+    public IngredientController(RecipeService recipeService, IngredientService ingredientService) {
         this.recipeService = recipeService;
+        this.ingredientService = ingredientService;
     }
+
 
     @GetMapping("/recipe/{recipeId}/ingredients")
     public String listIngredients(@PathVariable String recipeId, Model model){
@@ -23,6 +27,16 @@ public class IngredientController {
         // use command object to avoid lazy load errors in Thymeleaf.
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
         return "recipe/ingredient/list";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/{id}/show")
+    public String showIngredientByRecipeIdAndIngredientId(@PathVariable String recipeId, @PathVariable String id,
+                                                          Model model){
+        log.debug("Showing ingredient by recipeId and id: " + recipeId + " " + id);
+        model.addAttribute("ingredient", ingredientService.findCommandByRecipeIdAndIngredientId(
+                Long.valueOf(recipeId), Long.valueOf(id)));
+        return "recipe/ingredient/show";
+
     }
 
 
