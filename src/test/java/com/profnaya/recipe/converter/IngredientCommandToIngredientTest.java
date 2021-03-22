@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class IngredientCommandToIngredientTest {
 
     public static final Long LONG_VALUE = 1L;
+    public static final Long RECIPE_ID = 1L;
     public static final String DESCRIPTION = "description";
     public static final BigDecimal AMOUNT = new BigDecimal(0.5);
     public static final Long UOM_ID = 2L;
@@ -42,6 +43,7 @@ public class IngredientCommandToIngredientTest {
         //given
         IngredientCommand command = new IngredientCommand();
         command.setId(LONG_VALUE);
+        command.setRecipeId(RECIPE_ID);
         command.setDescription(DESCRIPTION);
         command.setAmount(AMOUNT);
         UnitOfMeasureCommand uomCommand = new UnitOfMeasureCommand();
@@ -56,6 +58,7 @@ public class IngredientCommandToIngredientTest {
         assertNotNull(ingredient);
         assertNotNull(ingredient.getUom());
         assertEquals(LONG_VALUE, ingredient.getId());
+        assertEquals(RECIPE_ID, ingredient.getRecipe().getId());
         assertEquals(DESCRIPTION, ingredient.getDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
         assertEquals(UOM_ID, ingredient.getUom().getId());
@@ -67,6 +70,7 @@ public class IngredientCommandToIngredientTest {
         //given
         IngredientCommand command = new IngredientCommand();
         command.setId(LONG_VALUE);
+        command.setRecipeId(RECIPE_ID);
         command.setDescription(DESCRIPTION);
         command.setAmount(AMOUNT);
 
@@ -77,6 +81,7 @@ public class IngredientCommandToIngredientTest {
         assertNotNull(ingredient);
         assertNull(ingredient.getUom());
         assertEquals(LONG_VALUE, ingredient.getId());
+        assertEquals(RECIPE_ID, ingredient.getRecipe().getId());
         assertEquals(DESCRIPTION, ingredient.getDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
 
@@ -87,6 +92,7 @@ public class IngredientCommandToIngredientTest {
         //given
         IngredientCommand command = new IngredientCommand();
         command.setId(LONG_VALUE);
+        command.setRecipeId(RECIPE_ID);
         command.setDescription(DESCRIPTION);
         command.setAmount(AMOUNT);
         UnitOfMeasureCommand uomCommand = new UnitOfMeasureCommand();
@@ -99,8 +105,10 @@ public class IngredientCommandToIngredientTest {
         assertNotNull(ingredient);
         assertNotNull(ingredient.getUom());
         assertEquals(LONG_VALUE, ingredient.getId());
+        assertEquals(RECIPE_ID, ingredient.getRecipe().getId());
         assertEquals(DESCRIPTION, ingredient.getDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
+        assertEquals(RECIPE_ID, ingredient.getRecipe().getId());
         assertEquals(null, command.getUom().getId());
         assertEquals(null, command.getUom().getDescription());
 

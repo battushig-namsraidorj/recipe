@@ -2,6 +2,7 @@ package com.profnaya.recipe.converter;
 
 import com.profnaya.recipe.command.IngredientCommand;
 import com.profnaya.recipe.domain.Ingredient;
+import com.profnaya.recipe.domain.Recipe;
 import com.profnaya.recipe.domain.UnitOfMeasure;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class IngredientToIngredientCommandTest {
 
+    public static final Recipe RECIPE = new Recipe();
     public static final Long LONG_VALUE = 1L;
     public static final String DESCRIPTION = "description";
     public static final BigDecimal AMOUNT = new BigDecimal(0.5);
