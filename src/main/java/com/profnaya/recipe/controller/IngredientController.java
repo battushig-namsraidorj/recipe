@@ -1,6 +1,8 @@
 package com.profnaya.recipe.controller;
 
 import com.profnaya.recipe.command.IngredientCommand;
+import com.profnaya.recipe.command.RecipeCommand;
+import com.profnaya.recipe.command.UnitOfMeasureCommand;
 import com.profnaya.recipe.service.IngredientService;
 import com.profnaya.recipe.service.RecipeService;
 import com.profnaya.recipe.service.UnitOfMeasureService;
@@ -33,6 +35,29 @@ public class IngredientController {
         // use command object to avoid lazy load errors in Thymeleaf.
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
         return "recipe/ingredient/list";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String newIngredientByRecipeId(@PathVariable String recipeId, Model model) {
+
+        //make sure we have a good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+
+        //need to return back parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        //init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList",  unitOfMeasureService.getUomList());
+
+        return "recipe/ingredient/ingredientform";
+
+
+
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/{id}/show")

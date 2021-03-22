@@ -35,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadData() {
         List<Recipe> recipes = new ArrayList<>();
+        UnitOfMeasure eachUom = unitOfMeasureRepository.findByDescription("Each").get();
         UnitOfMeasure teaSpoon = unitOfMeasureRepository.findByDescription("Teaspoon").get();
         UnitOfMeasure tableSpoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
 
@@ -59,6 +60,7 @@ public class DataLoader implements CommandLineRunner {
 
         guacRecipe.addIngredient(new Ingredient("salt", new BigDecimal(0.25), teaSpoon));
         guacRecipe.addIngredient(new Ingredient("lemon juice", new BigDecimal(1), tableSpoon));
+        guacRecipe.addIngredient(new Ingredient("Avocado", new BigDecimal(3), eachUom));
 
         guacRecipe.getCategories().add(mexicanCategory);
 

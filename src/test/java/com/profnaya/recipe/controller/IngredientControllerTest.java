@@ -99,4 +99,24 @@ public class IngredientControllerTest {
 
         //verify(ingredientService, times(1)).findCommandByRecipeIdAndIngredientId(anyLong(), anyLong());
     }
+
+    @Test
+    public void testNewIngredientByRecipeId() throws Exception {
+        //given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+
+       // when(ingredientService.findCommandByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
+
+        //when
+        mockMvc.perform(get("/recipe/1/ingredients/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"));
+
+        //then
+        //verify(ingredientService, times(1)).findCommandByRecipeIdAndIngredientId(anyLong(), anyLong());
+
+    }
+
+
+
 }
